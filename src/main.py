@@ -55,16 +55,13 @@ if __name__ == '__main__':
     assistant_token = os.environ.get('GA_TOKEN')
     credentials = os.environ.get('GA_CREDENTIALS')
 
-    dbl_token = os.environ.get('DBL_TOKEN')
-
     discord_token = os.environ.get('DISCORD_TOKEN')
 
     client = AssistantDiscordBot(
         device_model_id=device_model_id,
         device_id=device_id,
         credentials=credentials,
-        token=assistant_token,
-        dbl_token=dbl_token
+        token=assistant_token
     )
 
     client.run(discord_token)
