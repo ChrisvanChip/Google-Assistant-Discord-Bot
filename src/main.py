@@ -5,17 +5,6 @@ from discord.ext.commands import AutoShardedBot
 from assist import Assistant
 from top_api import top_setup
 
-INVOCATION_PREFIXES = ['hey google,', 'ok google,', 'okay google,']
-
-HELP_MESSAGE = '''I\'m your Google Assistant :grinning:
-Ready to help, just say `Hey Google, `
-Your queries are not handled directly,
-queries are handled by a Neural Network on Google cloud servers.
-Help is the only hardcoded command.'''
-
-ERROR_MESSAGE = '''Sorry, I can't help with that yet'''
-
-
 class AssistantDiscordBot(AutoShardedBot):
     """Responds to Discord User Queries"""
 
@@ -50,13 +39,10 @@ class AssistantDiscordBot(AutoShardedBot):
         if message.author.bot:
             return
         lower_content = message.content.lower()
-        # if message does not begin with an invocation prefix
-        if list(filter(lower_content.startswith, INVOCATION_PREFIXES)) == []:
+           
+        if message.channel.id != '823581709064077373':
             return
-
-        if 'help' in lower_content[:18]:
-            await message.channel.send(HELP_MESSAGE)
-
+            
         assistant_response = self.assistant.text_assist(lower_content)
 
         if assistant_response:
